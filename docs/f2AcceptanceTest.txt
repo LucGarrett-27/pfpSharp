@@ -1,0 +1,14 @@
+F2 - User Accounts & Roles: acceptance test (do by hand in the browser; write PASS/FAIL after each)
+Need: an Admin account, a fresh email for a new user, the login URL.
+
+1. Log in as Admin; open User Management; create a user with role = Scheduler. User appears with the Scheduler role. --
+2. Log out; log in as the new Scheduler. Login works; Scheduler tiles visible; User Management tile NOT visible. --
+3. As the Scheduler, type .../public/users.php into the address bar. Page says "Access denied". --
+4. (As Admin, create a Reviewer with level OPSO.) Log in as the Reviewer; open Schedule Deconfliction. Page says "View only", cells cannot be typed in, and there are no "+" buttons. --
+5. Log out; log in with a wrong password. "Invalid email or password" is shown and the dashboard still sends you to login. --
+
+Extra:
+6. As Admin, deactivate the Reviewer. The Reviewer is signed out on their next click and cannot log back in. --
+7. As Admin, try to deactivate yourself. There is no Deactivate button on your own row. --
+
+Automated version (same steps plus more, on a copy of the database): bash tests/f2_acceptance.sh

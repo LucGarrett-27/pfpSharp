@@ -1,4 +1,10 @@
-
+<?php
+// F2: only signed-in users can open the schedule, and only roles allowed to EDIT
+// 'deconfliction' (see includes/permissions.php) get editable cells.
+require_once __DIR__ . '/../includes/auth.php';
+require_permission('view', 'deconfliction');
+$canEdit = can('edit', 'deconfliction');
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,12 +22,30 @@
 
 <body>
 
+<nav class="topbar" aria-label="Main navigation">
+    <a class="brand" href="dashboard.php"><span class="brand-icon">P</span><span>PFP SHARP</span></a>
+    <div class="topbar-right">
+        <span class="user-chip">
+            <span class="user-email"><?= h($currentUser['email']) ?></span>
+            <span class="user-role"><?= h(role_label($currentUser['roles'], $currentUser['reviewer_level'])) ?></span>
+        </span>
+        <a class="logout" href="dashboard.php">← Dashboard</a>
+        <a class="logout" href="logout.php">Sign out ↗</a>
+    </div>
+</nav>
+
+
 <div class="page-shell">
     <div class="welcome-row">
         <div>
             <p class="eyebrow">PFP SHARP</p>
             <h1 class="page-title">Schedules</h1>
             <p class="welcome-copy">Daily operations and scheduling information.</p>
+            <?php if ($canEdit): ?>
+                <span class="access-badge access-edit" data-access="edit">You can view and edit</span>
+            <?php else: ?>
+                <span class="access-badge access-view" data-access="view">View only</span>
+            <?php endif; ?>
         </div>
     </div>
 
@@ -276,5 +300,18 @@
 </div>
 
 <script src="js/schedules.js"></script>
+<?php if (!$canEdit): ?>
+<script>
+    // View-only roles (Admin, Reviewer): lock every cell and hide the "+" add-row buttons.
+    // NOTE: this only changes the page. When the schedule starts SAVING to the database (F7),
+    // the PHP that saves it must also call require_permission('edit', 'deconfliction').
+    document.querySelectorAll('[contenteditable]').forEach(function (cell) {
+        cell.contentEditable = 'false';
+        cell.classList.remove('editable');
+    });
+    document.querySelectorAll('.add-row').forEach(function (cell) { cell.closest('tfoot').remove(); });
+    document.querySelectorAll('select').forEach(function (select) { select.disabled = true; });
+</script>
+<?php endif; ?>
 </body>
 </html>
