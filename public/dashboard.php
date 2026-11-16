@@ -20,7 +20,7 @@ require_once __DIR__ . '/../includes/auth.php';
         <a class="brand" href="dashboard.php"><span class="topbar-label"><?= htmlspecialchars($_SESSION['email']) ?>
         </span><span class="brand-icon">P</span><span>PFP SHARP</span></a>
         <div class="topbar-right"><span class="topbar-label">Aviation scheduling &amp; deconfliction</span><a
-                class="logout" href="login.php">Sign out ↗</a></div>
+                class="logout" href="logout.php">Sign out ↗</a></div>
     </nav>
     <main class="page-shell">
         <div class="welcome-row">

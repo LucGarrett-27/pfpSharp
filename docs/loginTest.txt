@@ -1,0 +1,7 @@
+Open login.html and confirm the page styling and images load correctly -- PASS
+Log in using one of your four administrator accounts -- PASS
+Confirm successful login redirects to dashboard.php -- PASS
+Confirm your email appears in the dashboard navigation -- PASS
+Open dashboard.php in a private/incognito browser window without logging in. It should redirect to login.html. -- PASS
+Log out and confirm you return to the login page -- PASS
+Try accessing dashboard.php again after logging out.
