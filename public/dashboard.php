@@ -1,3 +1,6 @@
+<?php
+require_once __DIR__ . '/../includes/auth.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,14 +12,15 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link type="text/css" rel="stylesheet" href="styles.css" />
+    <link type="text/css" rel="stylesheet" href="css/styles.css" />
 </head>
 
 <body>
     <nav class="topbar" aria-label="Main navigation">
-        <a class="brand" href="dashboard.html"><span class="brand-icon">P</span><span>PFP SHARP</span></a>
+        <a class="brand" href="dashboard.php"><span class="topbar-label"><?= htmlspecialchars($_SESSION['email']) ?>
+        </span><span class="brand-icon">P</span><span>PFP SHARP</span></a>
         <div class="topbar-right"><span class="topbar-label">Aviation scheduling &amp; deconfliction</span><a
-                class="logout" href="login.html">Sign out ↗</a></div>
+                class="logout" href="login.php">Sign out ↗</a></div>
     </nav>
     <main class="page-shell">
         <div class="welcome-row">
