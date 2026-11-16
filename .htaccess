@@ -1,0 +1,2 @@
+# Block private folders from the web (PHP pages in public/ can still use them).
+RedirectMatch 403 /(database|config|includes|docs|tests)/
