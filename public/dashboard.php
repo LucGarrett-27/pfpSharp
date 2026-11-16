@@ -36,7 +36,7 @@ require_once __DIR__ . '/../includes/auth.php';
         </div>
         <div class="row g-4">
             <div class="col-12 col-sm-6 col-xl-4">
-                <a class="module-card" href="module.html?module=deconfliction" aria-label="Open Schedule Deconfliction">
+                <a class="module-card" href="Schedule.html" aria-label="Open Schedule Deconfliction">
                     <div class="module-image-wrap"><img src="assets/deconfliction.svg" alt="" class="module-image"
                             loading="lazy"><span class="image-arrow" aria-hidden="true">↗</span></div>
                     <div class="module-copy"><span class="module-tag">Core workspace</span>

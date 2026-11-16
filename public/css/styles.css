@@ -543,6 +543,161 @@ body {
     font-size: .75rem;
     line-height: 1.6;
 }
+/* ==============================
+   SCHEDULE TABLES
+============================== */
+
+.schedule-section {
+    background: var(--white);
+    padding: 24px;
+    margin-bottom: 30px;
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    box-shadow: 0 6px 22px rgba(18, 42, 70, .045);
+    overflow: hidden;
+}
+
+.schedule-section h3 {
+    color: var(--navy);
+    font-size: 1.15rem;
+    font-weight: 800;
+    letter-spacing: .5px;
+    margin-bottom: 18px;
+    padding-bottom: 12px;
+    border-bottom: 3px solid var(--gold);
+}
+
+/* Table layout */
+
+.schedule-table {
+    margin-bottom: 0;
+    border-color: var(--line);
+    font-size: .85rem;
+    color: var(--ink);
+}
+
+.schedule-table th {
+    background: var(--navy);
+    color: var(--white);
+    padding: 13px 14px;
+    font-size: .72rem;
+    font-weight: 800;
+    letter-spacing: .7px;
+    text-transform: uppercase;
+    white-space: nowrap;
+    border-color: var(--navy-light);
+}
+
+.schedule-table td {
+    min-width: 100px;
+    height: 43px;
+    padding: 9px 12px;
+    vertical-align: middle;
+    background: var(--white);
+    border-color: var(--line);
+}
+
+/* Row category labels for PFP STAFF and DATA */
+
+.schedule-table tbody th {
+    background: #f1f4f8;
+    color: var(--navy);
+    font-weight: 700;
+    font-size: .82rem;
+    white-space: nowrap;
+    padding: 12px 14px;
+    border-color: var(--line);
+}
+
+/* Subtle alternating row colors */
+
+.schedule-table tbody tr:nth-child(even) td {
+    background: #fafbfd;
+}
+
+.schedule-table tbody tr:hover td {
+    background: #f8f3e7;
+}
+
+/* Editable cells */
+
+.editable {
+    cursor: text;
+    transition: background .15s ease, box-shadow .15s ease;
+}
+
+.editable:hover {
+    background: #fffaf0 !important;
+}
+
+.editable:focus {
+    outline: none;
+    background: #fffaf0 !important;
+    box-shadow: inset 0 0 0 2px var(--gold);
+}
+
+/* Add row button */
+
+.add-row {
+    text-align: center;
+    cursor: pointer;
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--navy);
+    background: #f8f1df !important;
+    border: 1px dashed var(--gold) !important;
+    transition: background .2s ease, color .2s ease;
+}
+
+.add-row:hover {
+    background: var(--gold) !important;
+    color: var(--navy);
+}
+
+/* Notes dropdown */
+
+.notes-select {
+    width: 100%;
+    min-width: 150px;
+    border: 1px solid var(--line);
+    border-radius: 7px;
+    color: var(--ink);
+    font-size: .85rem;
+}
+
+.notes-select:focus {
+    border-color: var(--gold);
+    box-shadow: 0 0 0 .2rem rgba(212, 175, 87, .2);
+}
+
+/* Horizontal scrolling for wide tables */
+
+.schedule-section .table-responsive {
+    border-radius: 9px;
+}
+
+/* Responsive spacing */
+
+@media (max-width: 767px) {
+    .schedule-section {
+        padding: 16px;
+        margin-bottom: 22px;
+        border-radius: 14px;
+    }
+
+    .schedule-section h3 {
+        font-size: 1rem;
+    }
+
+    .schedule-table th {
+        padding: 10px;
+        font-size: .68rem;
+    }
+
+    .schedule-table td {
+        min-width: 90px;
+    }
+}
 
 /* ==============================
    RESPONSIVE STYLES
