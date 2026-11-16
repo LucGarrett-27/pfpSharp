@@ -1,8 +1,8 @@
-
 <?php
 //entire file from AI. Have no idea how databases work, just using this a temporary testing 
 //model since we are not sure if we are even going to useSQLIT
-$dbPath = dirname(__DIR__) . '/database/pfpsharp.db';
+// The automated test (tests/f2_acceptance.sh) points this at a throwaway copy instead.
+$dbPath = getenv('PFP_SHARP_DB_PATH') ?: dirname(__DIR__) . '/database/pfpsharp.db';
 
 try {
     $pdo = new PDO('sqlite:' . $dbPath);

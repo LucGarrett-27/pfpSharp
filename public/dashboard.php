@@ -1,27 +1,10 @@
 <?php
 require_once __DIR__ . '/../includes/auth.php';
+require_once __DIR__ . '/../includes/modules.php';
+
+$pageTitle = 'Dashboard';
+require __DIR__ . '/../includes/topbar.php';
 ?>
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PFP Sharp | Dashboard</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link type="text/css" rel="stylesheet" href="css/styles.css" />
-</head>
-
-<body>
-    <nav class="topbar" aria-label="Main navigation">
-        <a class="brand" href="dashboard.php"><span class="topbar-label"><?= htmlspecialchars($_SESSION['email']) ?>
-        </span><span class="brand-icon">P</span><span>PFP SHARP</span></a>
-        <div class="topbar-right"><span class="topbar-label">Aviation scheduling &amp; deconfliction</span><a
-                class="logout" href="logout.php">Sign out ↗</a></div>
-    </nav>
     <main class="page-shell">
         <div class="welcome-row">
             <div>
@@ -35,75 +18,24 @@ require_once __DIR__ . '/../includes/auth.php';
             <h2>Applications</h2><span>Choose a tile to open a workspace</span>
         </div>
         <div class="row g-4">
-            <div class="col-12 col-sm-6 col-xl-4">
-                <a class="module-card" href="Schedule.html" aria-label="Open Schedule Deconfliction">
-                    <div class="module-image-wrap"><img src="assets/deconfliction.svg" alt="" class="module-image"
-                            loading="lazy"><span class="image-arrow" aria-hidden="true">↗</span></div>
-                    <div class="module-copy"><span class="module-tag">Core workspace</span>
-                        <h2>Schedule Deconfliction</h2>
-                        <p>Review potential scheduling conflicts and see where further attention may be needed.</p><span
-                            class="module-link">Open workspace <span aria-hidden="true">→</span></span>
-                    </div>
-                </a>
-            </div>
-            <div class="col-12 col-sm-6 col-xl-4">
-                <a class="module-card" href="module.html?module=schedule" aria-label="Open View Schedule">
-                    <div class="module-image-wrap"><img src="assets/schedule.svg" alt="" class="module-image"
-                            loading="lazy"><span class="image-arrow" aria-hidden="true">↗</span></div>
-                    <div class="module-copy"><span class="module-tag">Scheduling</span>
-                        <h2>View Schedule</h2>
-                        <p>Open the current schedule and review planned events in one place.</p><span
-                            class="module-link">Open workspace <span aria-hidden="true">→</span></span>
-                    </div>
-                </a>
-            </div>
-            <div class="col-12 col-sm-6 col-xl-4">
-                <a class="module-card" href="module.html?module=students" aria-label="Open Student Data">
-                    <div class="module-image-wrap"><img src="assets/students.svg" alt="" class="module-image"
-                            loading="lazy"><span class="image-arrow" aria-hidden="true">↗</span></div>
-                    <div class="module-copy"><span class="module-tag">Records</span>
-                        <h2>Student Data</h2>
-                        <p>View and maintain student records and related scheduling information.</p><span
-                            class="module-link">Open workspace <span aria-hidden="true">→</span></span>
-                    </div>
-                </a>
-            </div>
-            <div class="col-12 col-sm-6 col-xl-4">
-                <a class="module-card" href="module.html?module=aircraft" aria-label="Open Aircraft & Resources">
-                    <div class="module-image-wrap"><img src="assets/aircraft.svg" alt="" class="module-image"
-                            loading="lazy"><span class="image-arrow" aria-hidden="true">↗</span></div>
-                    <div class="module-copy"><span class="module-tag">Resources</span>
-                        <h2>Aircraft & Resources</h2>
-                        <p>Keep track of aircraft and other resources that may affect a schedule.</p><span
-                            class="module-link">Open workspace <span aria-hidden="true">→</span></span>
-                    </div>
-                </a>
-            </div>
-            <div class="col-12 col-sm-6 col-xl-4">
-                <a class="module-card" href="module.html?module=reports" aria-label="Open Conflict Reports">
-                    <div class="module-image-wrap"><img src="assets/reports.svg" alt="" class="module-image"
-                            loading="lazy"><span class="image-arrow" aria-hidden="true">↗</span></div>
-                    <div class="module-copy"><span class="module-tag">Analysis</span>
-                        <h2>Conflict Reports</h2>
-                        <p>Review summaries of flagged conflicts and scheduling activity.</p><span
-                            class="module-link">Open workspace <span aria-hidden="true">→</span></span>
-                    </div>
-                </a>
-            </div>
-            <div class="col-12 col-sm-6 col-xl-4">
-                <a class="module-card" href="module.html?module=users" aria-label="Open User Management">
-                    <div class="module-image-wrap"><img src="assets/users.svg" alt="" class="module-image"
-                            loading="lazy"><span class="image-arrow" aria-hidden="true">↗</span></div>
-                    <div class="module-copy"><span class="module-tag">Administration</span>
-                        <h2>User Management</h2>
-                        <p>Manage access roles and workspace settings for your team.</p><span class="module-link">Open
-                            workspace <span aria-hidden="true">→</span></span>
-                    </div>
-                </a>
-            </div>
+            <?php foreach (MODULES as $key => $module): ?>
+                <?php if (!can('view', $key)) continue; // only show tiles this user's role can open ?>
+                <?php $link = $module['link'] ?? (($key === 'users') ? 'users.php' : 'module.php?module=' . $key); ?>
+                <div class="col-12 col-sm-6 col-xl-4">
+                    <a class="module-card" href="<?= h($link) ?>" aria-label="Open <?= h($module['title']) ?>" data-module="<?= h($key) ?>">
+                        <div class="module-image-wrap"><img src="<?= h($module['image']) ?>" alt="" class="module-image"
+                                loading="lazy"><span class="image-arrow" aria-hidden="true">↗</span></div>
+                        <div class="module-copy"><span class="module-tag"><?= h($module['tag']) ?></span>
+                            <h2><?= h($module['title']) ?></h2>
+                            <p><?= h($module['description']) ?></p><span
+                                class="module-link">Open workspace <span aria-hidden="true">→</span></span>
+                        </div>
+                    </a>
+                </div>
+            <?php endforeach; ?>
         </div>
-        <p class="footer-note">PFP Sharp prototype. These tiles currently open placeholder pages so you can build and
-            connect each function one at a time.</p>
+        <p class="footer-note">PFP Sharp prototype. You see the workspaces your role allows
+            (<?= h(role_label($currentUser['roles'], $currentUser['reviewer_level'])) ?>).</p>
     </main>
     <script>
         const today = new Date();

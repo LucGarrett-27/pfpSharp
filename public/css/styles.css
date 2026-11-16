@@ -790,3 +790,44 @@ body {
         transition: none !important;
     }
 }
+/* ==========================================================
+   F2 - User accounts & roles (user chip, access badges, user management)
+   ========================================================== */
+.user-chip { display: flex; flex-direction: column; align-items: flex-end; line-height: 1.25 }
+.user-chip .user-email { font-size: .82rem; color: #fff; font-weight: 700 }
+.user-chip .user-role { font-size: .7rem; color: #d4af57; font-weight: 800; letter-spacing: .5px; text-transform: uppercase }
+
+.access-badge { display: inline-block; padding: 5px 11px; border-radius: 999px; font-size: .75rem; font-weight: 800; letter-spacing: .4px; text-transform: uppercase }
+.access-edit { background: #e7f5ec; color: #1e6b3a }
+.access-view { background: #eef1f5; color: #475467 }
+
+.notice-ok { background: #e7f5ec; color: #1e5233 }
+.notice-ok strong { color: #1e6b3a }
+.notice-error { background: #fdecea; color: #7a1c14 }
+.notice-error strong { color: #b42318 }
+
+.button-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-top: 26px }
+.button-row .btn-home { margin-top: 0 }
+.btn-gold { display: inline-flex; align-items: center; gap: 9px; border: 0; border-radius: 9px; padding: 12px 17px; background: #d4af57; color: #0b1f3a; text-decoration: none; font-weight: 800 }
+.btn-gold:hover { background: #c09a3f; color: #0b1f3a }
+.btn-outline-navy { display: inline-flex; align-items: center; border: 1px solid #0b1f3a; border-radius: 9px; padding: 7px 12px; background: #fff; color: #0b1f3a; font-size: .8rem; font-weight: 700; text-decoration: none }
+.btn-outline-navy:hover { background: #0b1f3a; color: #fff }
+.btn-danger-soft { border-color: #b42318; color: #b42318 }
+.btn-danger-soft:hover { background: #b42318; color: #fff }
+.back-link-dark { color: #0b1f3a; font-weight: 700; text-decoration: none; white-space: nowrap }
+.back-link-dark:hover { color: #9a7a2f }
+
+.card-box { background: #fff; border: 1px solid #e6ebf1; border-radius: 18px; padding: 26px; box-shadow: 0 6px 22px rgba(18, 42, 70, .035) }
+.card-box h2 { font-size: 1.05rem; font-weight: 800; color: #0b1f3a; margin: 0 0 18px }
+.users-table { width: 100%; font-size: .88rem; border-collapse: separate; border-spacing: 0 }
+.users-table th { background: #0b1f3a; color: #fff; font-weight: 700; padding: 11px 12px; white-space: nowrap }
+.users-table th:first-child { border-top-left-radius: 10px }
+.users-table th:last-child { border-top-right-radius: 10px }
+.users-table td { padding: 11px 12px; border-bottom: 1px solid #e6ebf1; vertical-align: middle }
+.users-table tr.inactive td { color: #9aa6b5 }
+.status-pill { display: inline-block; padding: 3px 9px; border-radius: 999px; font-size: .72rem; font-weight: 800 }
+.status-active { background: #e7f5ec; color: #1e6b3a }
+.status-inactive { background: #eef1f5; color: #667085 }
+.role-chip { display: inline-block; margin: 1px 3px 1px 0; padding: 2px 8px; border-radius: 6px; background: #f8f1df; color: #8a6a21; font-size: .72rem; font-weight: 800 }
+
+@media(max-width:575px) { .user-chip { display: none } }
